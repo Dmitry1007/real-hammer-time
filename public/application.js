@@ -4,7 +4,7 @@ $("#response-btn").on("click", function() {
   $("form .row").append(
     `<div class="new input-field col s12">
       <i id="remove-response-icon" class="remove-icon material-icons prefix tooltipped" data-position="right" data-delay="50" data-tooltip="Remove Response">no_sim</i>
-      <input id="poll_response${responseCount}" type="tel" class="validate">
+      <input id="poll_response${responseCount}" type="tel" class="validate" name="poll[responses][]">
       <label for="poll_response${responseCount}">Response</label>
      </div>`
     )

@@ -13,18 +13,18 @@
 
     <div class="row">
       <h5 id="poll-title">Make Your Dream Poll</h5>
-        <form class="col s12">
+        <form action="/polls/new" method="post" class="col s12">
           <div class="row">
             <div class="input-field col s12">
-              <input id="poll_title" type="text" class="validate">
+              <input id="poll_title" type="text" class="validate" name="poll[title]">
               <label for="poll_title">Poll Title</label>
             </div>
             <div class="input-field col s12">
-              <input id="poll_question" type="text" class="validate name='poll[responses][]'">
+              <input id="poll_question" type="text" class="validate" name="poll[question]">
               <label for="poll_question">Poll Question</label>
             </div>
             <div class="input-field col s12">
-              <input id="poll_response" type="text" class="validate">
+              <input id="poll_response" type="text" class="validate" name="poll[responses][]">
               <label for="poll_response">Response</label>
             </div>
           </div>
