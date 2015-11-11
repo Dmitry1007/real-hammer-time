@@ -3,7 +3,7 @@ $("#response-btn").on("click", function() {
   responseCount++
   $("form .row").append(
     `<div class="new input-field col s12">
-      <i id="remove-response-icon" class="material-icons prefix tooltipped" data-position="right" data-delay="50" data-tooltip="Remove Response">no_sim</i>
+      <i id="remove-response-icon" class="remove-icon material-icons prefix tooltipped" data-position="right" data-delay="50" data-tooltip="Remove Response">no_sim</i>
       <input id="poll_response${responseCount}" type="tel" class="validate">
       <label for="poll_response${responseCount}">Response</label>
      </div>`
@@ -12,7 +12,7 @@ $("#response-btn").on("click", function() {
 })
 
 $("form .row").on("click", function(event) {
-  if (event.target.parentElement.className === "new input-field col s12") {
+  if ($(event.target).hasClass('remove-icon')) {
     $('.material-tooltip').remove()
     event.target.parentElement.remove()
   }

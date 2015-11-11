@@ -1,3 +1,13 @@
 i {
   cursor: pointer;
 }
+
+body {
+  text-align: center;
+  font-family: monospace;
+  margin-top: 10%;
+}
+
+#poll-title {
+  text-decoration: underline;
+}
