@@ -24,19 +24,21 @@ var polls = {}
 app.post("/polls/new", function (req, res) {
   var poll      = req.body.poll;
   var id        = crypto.randomBytes(10).toString("hex");
+  var voterId   = crypto.randomBytes(10).toString("hex");
 
   poll.id       = id;
   poll.voterId  = crypto.randomBytes(10).toString("hex");
-  // poll.voterUrl = "/vote/" + voterId;
+
+  poll.voterUrl = "/vote/" + voterId;
 
   polls[id] = poll;
+  // eval(pry.it)
   res.redirect("/polls/" + id);
 });
 
 app.get("/polls/:id", function (req, res) {
   var poll = polls[req.params.id];
   res.render('poll', {pollData: poll})
-  // eval(pry.it)
 })
 
 http.listen(process.env.PORT || 3000, function(){
