@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
+app.set('view engine', 'ejs')
+
 app.get("/", function (req, res){
   res.sendFile(path.join(__dirname, "/public/index.html"));
 });
@@ -33,10 +35,8 @@ app.post("/polls/new", function (req, res) {
 
 app.get("/polls/:id", function (req, res) {
   var poll = polls[req.params.id];
+  res.render('poll', {pollData: poll})
   // eval(pry.it)
-  res.send(`<html><body>
-      <h1>${poll.title}</h1>
-    </body></html>`);
 })
 
 http.listen(process.env.PORT || 3000, function(){
