@@ -8,7 +8,7 @@ const http    = require("http").Server(app)
 const io      = require("socket.io")(http)
 const path    = require("path")
 
-var helpers = require('express-helpers')(app);
+var helpers = require('express-helpers')(app)
 
 app.set("view engine", "ejs")
 
@@ -25,6 +25,7 @@ app.get("/", function (req, res){
 })
 
 app.post("/poll/new", function (req, res) {
+  eval(pry.it)
   var poll       = new Poll(req.body.poll)
   polls[poll.id] = poll
   res.redirect("/poll/" + poll.id)
@@ -36,7 +37,6 @@ app.get("/poll/:id", function (req, res) {
 })
 
 app.get("/vote/:voterId", function (req, res) {
-  // eval(pry.it)
   var pollValues = _.values(polls)
   var poll = _.find(pollValues, function(value) {
     return value.voterId === req.params.voterId
