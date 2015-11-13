@@ -1,5 +1,5 @@
-// Our Server
-// const Poll    = require("/models/poll")
+// Server
+const Poll    = require("./models/poll")
 var _ = require('lodash');
 pry = require("pryjs")
 const express = require("express");
@@ -7,7 +7,6 @@ const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const path = require("path");
-const crypto = require('crypto');
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -22,15 +21,6 @@ app.get("/", function (req, res){
 });
 
 var polls = {}
-
-function Poll(pollFromRequest) {
-  this.title     = pollFromRequest.title
-  this.question  = pollFromRequest.question
-  this.responses = pollFromRequest.responses
-  this.id        = crypto.randomBytes(10).toString("hex")
-  this.voterId   = crypto.randomBytes(10).toString("hex")
-  this.voterUrl  = "/vote/" + this.voterId;
-}
 
 app.post("/poll/new", function (req, res) {
   var poll = new Poll(req.body.poll)
