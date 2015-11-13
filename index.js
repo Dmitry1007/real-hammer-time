@@ -1,4 +1,5 @@
 // Our Server
+var _ = require('lodash');
 pry = require("pryjs")
 const express = require("express");
 const app = express();
@@ -21,24 +22,35 @@ app.get("/", function (req, res){
 
 var polls = {}
 
-app.post("/polls/new", function (req, res) {
+app.post("/poll/new", function (req, res) {
   var poll      = req.body.poll;
   var id        = crypto.randomBytes(10).toString("hex");
-  var voterId   = crypto.randomBytes(10).toString("hex");
 
   poll.id       = id;
-  poll.voterId  = crypto.randomBytes(10).toString("hex");
-
+  var voterId   = crypto.randomBytes(10).toString("hex");
+  poll.voterId  = voterId
   poll.voterUrl = "/vote/" + voterId;
 
   polls[id] = poll;
-  // eval(pry.it)
-  res.redirect("/polls/" + id);
+  res.redirect("/poll/" + id);
 });
 
-app.get("/polls/:id", function (req, res) {
+app.get("/poll/:id", function (req, res) {
   var poll = polls[req.params.id];
   res.render('poll', {pollData: poll})
+})
+
+app.get("/vote/:voterId", function (req, res) {
+  // eval(pry.it)
+  // debugger;
+  // console.log(polls);
+  var pollValues = _.values(polls)
+  // console.log(pollValues);
+  // console.log(req.params)
+  var poll = _.find(pollValues, function(value) {
+    return value.voterId === req.params.voterId
+  })
+  res.render('vote', {pollData: poll})
 })
 
 http.listen(process.env.PORT || 3000, function(){
