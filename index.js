@@ -1,4 +1,5 @@
 // Our Server
+// const Poll    = require("/models/poll")
 var _ = require('lodash');
 pry = require("pryjs")
 const express = require("express");
@@ -22,13 +23,28 @@ app.get("/", function (req, res){
 
 var polls = {}
 
+function Poll(pollFromRequest) {
+  this.title     = pollFromRequest.title
+  this.question  = pollFromRequest.question
+  this.responses = pollFromRequest.responses
+  this.id        = generateRandomId()
+  this.voterId   = generateRandomId()
+  this.voterUrl  = "/vote/" + voterId;
+}
+
+Poll.prototype.generateRandomId = function () {
+ crypto.randomBytes(10).toString("hex");
+}
+
 app.post("/poll/new", function (req, res) {
+  // var poll = new Poll(req.body.poll)
   var poll      = req.body.poll;
   var id        = crypto.randomBytes(10).toString("hex");
 
   poll.id       = id;
   var voterId   = crypto.randomBytes(10).toString("hex");
   poll.voterId  = voterId
+
   poll.voterUrl = "/vote/" + voterId;
 
   polls[id] = poll;
@@ -42,11 +58,7 @@ app.get("/poll/:id", function (req, res) {
 
 app.get("/vote/:voterId", function (req, res) {
   // eval(pry.it)
-  // debugger;
-  // console.log(polls);
   var pollValues = _.values(polls)
-  // console.log(pollValues);
-  // console.log(req.params)
   var poll = _.find(pollValues, function(value) {
     return value.voterId === req.params.voterId
   })
