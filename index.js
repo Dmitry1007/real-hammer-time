@@ -27,28 +27,16 @@ function Poll(pollFromRequest) {
   this.title     = pollFromRequest.title
   this.question  = pollFromRequest.question
   this.responses = pollFromRequest.responses
-  this.id        = generateRandomId()
-  this.voterId   = generateRandomId()
-  this.voterUrl  = "/vote/" + voterId;
-}
-
-Poll.prototype.generateRandomId = function () {
- crypto.randomBytes(10).toString("hex");
+  this.id        = crypto.randomBytes(10).toString("hex")
+  this.voterId   = crypto.randomBytes(10).toString("hex")
+  this.voterUrl  = "/vote/" + this.voterId;
 }
 
 app.post("/poll/new", function (req, res) {
-  // var poll = new Poll(req.body.poll)
-  var poll      = req.body.poll;
-  var id        = crypto.randomBytes(10).toString("hex");
+  var poll = new Poll(req.body.poll)
 
-  poll.id       = id;
-  var voterId   = crypto.randomBytes(10).toString("hex");
-  poll.voterId  = voterId
-
-  poll.voterUrl = "/vote/" + voterId;
-
-  polls[id] = poll;
-  res.redirect("/poll/" + id);
+  polls[poll.id] = poll;
+  res.redirect("/poll/" + poll.id);
 });
 
 app.get("/poll/:id", function (req, res) {
