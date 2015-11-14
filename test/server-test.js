@@ -42,4 +42,30 @@ describe('Server', () => {
       });
     });
   });
+
+  describe('POST /poll/new', () => {
+    beforeEach(() => {
+      app.polls = {};
+    });
+
+    it('should receive and store data', (done) => {
+      var validPoll = {
+        poll: {
+          title: "Mad Awesome Poll",
+          question: "Is this poll mad awesome or wha?",
+          responses: ["yes", "maybe", "no"]
+        }
+      };
+
+      this.request.post('/poll/new', { form: validPoll }, (error, response) => {
+        if (error) { done(error); }
+
+        var pollCount = Object.keys(app.polls).length;
+
+        assert.equal(pollCount, 1, `Expected 1 polls, found ${pollCount}`);
+
+        done();
+      });
+    });
+  });
 });

@@ -18,29 +18,29 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static("public"))
 
-var polls = {}
+app.polls = {}
 
 app.locals.title = "Make Your Dream Poll";
+// eval(pry.it)
 
 app.get("/", function (req, res){
-  // response.send(app.locals.title);
-  res.sendFile(path.join(__dirname, "/public/index.html"))
+  // res.sendFile(path.join(__dirname, "/public/index.html"))
+  res.render('index');
 })
 
 app.post("/poll/new", function (req, res) {
-  // eval(pry.it)
   var poll       = new Poll(req.body.poll)
-  polls[poll.id] = poll
+  app.polls[poll.id] = poll
   res.redirect("/poll/" + poll.id)
 })
 
 app.get("/poll/:id", function (req, res) {
-  var poll = polls[req.params.id]
+  var poll = app.polls[req.params.id]
   res.render("poll", {pollData: poll})
 })
 
 app.get("/vote/:voterId", function (req, res) {
-  var pollValues = _.values(polls)
+  var pollValues = _.values(app.polls)
   var poll = _.find(pollValues, function(value) {
     return value.voterId === req.params.voterId
   })
