@@ -48,6 +48,22 @@ describe('Server', () => {
       app.polls = {};
     });
 
+    it('should not return 404', (done) => {
+      var validPoll = {
+        poll: {
+          title: "Mad Awesome Poll",
+          question: "Is this poll mad awesome or wha?",
+          responses: ["yes", "maybe", "no"]
+        }
+      };
+
+      this.request.post('/poll/new', { form: validPoll }, (error, response) => {
+        if (error) { done(error); }
+        assert.notEqual(response.statusCode, 404);
+        done();
+      });
+    });
+
     it('should receive and store data', (done) => {
       var validPoll = {
         poll: {
