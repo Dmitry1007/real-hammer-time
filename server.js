@@ -20,7 +20,10 @@ app.use(express.static("public"))
 
 var polls = {}
 
+app.locals.title = "Make Your Dream Poll";
+
 app.get("/", function (req, res){
+  // response.send(app.locals.title);
   res.sendFile(path.join(__dirname, "/public/index.html"))
 })
 
