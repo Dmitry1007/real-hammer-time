@@ -1,5 +1,5 @@
 // Server
-const Poll    = require("./models/poll")
+const Poll    = require("./lib/poll")
 const _       = require("lodash")
 const pry     = require("pryjs")
 const express = require("express")

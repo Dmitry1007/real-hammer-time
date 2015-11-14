@@ -1,6 +1,7 @@
-const assert  = require('assert');
-const app     = require('../server');
-const request = require('request');
+const assert   = require('assert');
+const app      = require('../server');
+const request  = require('request');
+const fixtures = require('./fixtures');
 
 describe('Server', () => {
   before((done) => {
@@ -49,15 +50,9 @@ describe('Server', () => {
     });
 
     it('should not return 404', (done) => {
-      var validPoll = {
-        poll: {
-          title: "Mad Awesome Poll",
-          question: "Is this poll mad awesome or wha?",
-          responses: ["yes", "maybe", "no"]
-        }
-      };
+      var payload = { poll: fixtures.validPoll };
 
-      this.request.post('/poll/new', { form: validPoll }, (error, response) => {
+      this.request.post('/poll/new', { form: payload }, (error, response) => {
         if (error) { done(error); }
         assert.notEqual(response.statusCode, 404);
         done();
@@ -65,15 +60,9 @@ describe('Server', () => {
     });
 
     it('should receive and store data', (done) => {
-      var validPoll = {
-        poll: {
-          title: "Mad Awesome Poll",
-          question: "Is this poll mad awesome or wha?",
-          responses: ["yes", "maybe", "no"]
-        }
-      };
+      var payload = { poll: fixtures.validPoll };
 
-      this.request.post('/poll/new', { form: validPoll }, (error, response) => {
+      this.request.post('/poll/new', { form: payload }, (error, response) => {
         if (error) { done(error); }
 
         var pollCount = Object.keys(app.polls).length;

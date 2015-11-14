@@ -1,6 +1,6 @@
 const chai     = require("chai")
 const assert   = chai.assert
-const Poll     = require("../models/poll")
+const Poll     = require("../lib/poll")
 
 
 describe('Poll', function () {
