@@ -25,7 +25,7 @@ app.get("/", function (req, res){
 })
 
 app.post("/poll/new", function (req, res) {
-  eval(pry.it)
+  // eval(pry.it)
   var poll       = new Poll(req.body.poll)
   polls[poll.id] = poll
   res.redirect("/poll/" + poll.id)
@@ -44,6 +44,10 @@ app.get("/vote/:voterId", function (req, res) {
   res.render("vote", {pollData: poll})
 })
 
-http.listen(process.env.PORT || 3000, function(){
-  console.log("Your server is up and running on Port 3000. Good job!")
-})
+if (!module.parent) {
+  http.listen(process.env.PORT || 3000, function(){
+    console.log("Your server is up and running on Port 3000. Good job!")
+  })
+}
+
+module.exports = app
