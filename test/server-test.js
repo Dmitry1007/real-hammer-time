@@ -1,5 +1,6 @@
-const assert = require('assert');
-const app    = require('../server');
+const assert  = require('assert');
+const app     = require('../server');
+const request = require('request');
 
 describe('Server', () => {
   before(done => {
@@ -18,4 +19,13 @@ describe('Server', () => {
     assert(app);
   });
 
+  describe('GET /', () => {
+    it('should return a 200', (done) => {
+      request.get('http://localhost:9876', (error, response) => {
+        if (error) { done(error); }
+        assert.equal(response.statusCode, 200);
+        done();
+      });
+    });
+  });
 });
