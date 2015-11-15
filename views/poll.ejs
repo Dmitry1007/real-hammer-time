@@ -1,6 +1,10 @@
 <%= pollData.title %><br>
-<%= pollData.question %><br>
-<%= pollData.responses[0] %><br>
-<%= pollData.responses[1] %><br>
-<%= pollData.responses[2] %><br>
+<%= pollData.question %><br><br>
+
+<%  pollData.responses.forEach(function (response) { %>
+    <%= response %>
+    <span id="">: 0</span>
+    <br>
+<%  }) %><br>
+
 <%- link_to('User Poll URL', pollData.voterUrl) %>

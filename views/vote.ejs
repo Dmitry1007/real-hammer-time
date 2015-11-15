@@ -1,5 +1,14 @@
 <%= pollData.title %><br>
-<%= pollData.question %><br>
-<%= pollData.responses[0] %><br>
-<%= pollData.responses[1] %><br>
-<%= pollData.responses[2] %><br>
+<%= pollData.question %><br><br>
+
+<form action="#">
+
+<%  pollData.responses.forEach(function (response) { %>
+    <%= response %>
+    <input type="checkbox" id="test5" />
+    <br>
+<%  }) %>
+  <br><br>
+  <button id="submit-poll" class="btn waves-effect waves-light" type="button" name="action">Submit Poll
+  </button>
+</form>

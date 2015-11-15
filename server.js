@@ -1,4 +1,3 @@
-// Server
 const Poll    = require("./lib/poll")
 const _       = require("lodash")
 const pry     = require("pryjs")
@@ -21,7 +20,6 @@ app.use(express.static("public"))
 app.polls = {}
 
 app.locals.title = "Make Your Dream Poll";
-// eval(pry.it)
 
 app.get("/", function (req, res){
   // res.sendFile(path.join(__dirname, "/public/index.html"))
@@ -35,8 +33,12 @@ app.post("/poll/new", function (req, res) {
 })
 
 app.get("/poll/:id", function (req, res) {
+  // console.log(req.params)
+  // console.log(req.params.id)
+  // console.log(app.polls.testPoll)
   var poll = app.polls[req.params.id]
   res.render("poll", {pollData: poll})
+  // response.sendStatus(200);
 })
 
 app.get("/vote/:voterId", function (req, res) {
@@ -44,6 +46,7 @@ app.get("/vote/:voterId", function (req, res) {
   var poll = _.find(pollValues, function(value) {
     return value.voterId === req.params.voterId
   })
+  // eval(pry.it)
   res.render("vote", {pollData: poll})
 })
 
