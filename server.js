@@ -57,9 +57,12 @@ io.on("connection", function (socket) {
 
   socket.emit("clickMessage", "You Clicked.")
 
-  socket.on("voted", function (vote) {
-    console.log(vote)
-    io.sockets.emit("clickVote", vote)
+  socket.on("voted", function (data) {
+    var poll = app.polls[data.pollId]
+    console.log(poll)
+    poll.responsesAndVotes[data.response]++
+    console.log(poll)
+    io.sockets.emit("clickVote", poll)
   })
 
   socket.on("disconnect", function () {

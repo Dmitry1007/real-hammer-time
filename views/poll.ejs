@@ -3,7 +3,7 @@
 
 <%  pollData.responses.forEach(function (response) { %>
     <%= response %>
-    <span id="<%= response %>"></span>
+    <span id="<%= response %>"><%= pollData.responsesAndVotes[response] %></span>
     <br>
 <%  }) %><br>
 
