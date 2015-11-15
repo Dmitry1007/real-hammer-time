@@ -1,20 +1,18 @@
-const Poll    = require("./lib/poll")
-const _       = require("lodash")
-const pry     = require("pryjs")
-const express = require("express")
-var   app     = express()
-const http    = require("http").Server(app)
-const io      = require("socket.io")(http)
-const path    = require("path")
-
-var helpers = require('express-helpers')(app)
+const Poll       = require("./lib/poll")
+const _          = require("lodash")
+const pry        = require("pryjs")
+const express    = require("express")
+const app        = express()
+const http       = require("http").Server(app)
+const io         = require("socket.io")(http)
+const path       = require("path")
+const bodyParser = require("body-parser")
+const helpers    = require('express-helpers')(app)
 
 app.set("view engine", "ejs")
 
-const bodyParser = require("body-parser")
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
 app.use(express.static("public"))
 
 app.polls = {}
@@ -33,12 +31,8 @@ app.post("/poll/new", function (req, res) {
 })
 
 app.get("/poll/:id", function (req, res) {
-  // console.log(req.params)
-  // console.log(req.params.id)
-  // console.log(app.polls.testPoll)
   var poll = app.polls[req.params.id]
   res.render("poll", {pollData: poll})
-  // response.sendStatus(200);
 })
 
 app.get("/vote/:voterId", function (req, res) {
@@ -51,9 +45,27 @@ app.get("/vote/:voterId", function (req, res) {
 })
 
 if (!module.parent) {
-  http.listen(process.env.PORT || 3000, function(){
+  var server = http.listen(process.env.PORT || 3000, function(){
     console.log("Your server is up and running on Port 3000. Good job!")
   })
 }
 
+io.on("connection", function (socket) {
+  console.log("A user has connected.", io.engine.clientsCount)
+
+  // io.sockets.emit("usersConnected", io.engine.clientsCount)
+
+  socket.emit("clickMessage", "You Clicked.")
+
+  socket.on("voted", function (vote) {
+    console.log(vote)
+    io.sockets.emit("clickVote", vote)
+  })
+
+  socket.on("disconnect", function () {
+    console.log("A user has disconnected.", io.engine.clientsCount)
+  });
+});
+
 module.exports = app
+module.exports = server

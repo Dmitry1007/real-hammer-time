@@ -3,8 +3,16 @@
 
 <%  pollData.responses.forEach(function (response) { %>
     <%= response %>
-    <span id="">: 0</span>
+    <span id="<%= response %>"></span>
     <br>
 <%  }) %><br>
 
+<button>Close Poll</button>
+
 <%- link_to('User Poll URL', pollData.voterUrl) %>
+
+<script src="/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/application.js"></script>
+<script src="/poll.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js"></script>
