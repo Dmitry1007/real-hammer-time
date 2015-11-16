@@ -9,7 +9,7 @@ for (var i = 0; i < buttons.length; i++) {
   });
 }
 
-socket.on("closePoll", function (poll) {
+socket.on("pollClosed", function (poll) {
   $("#poll-closed").fadeIn(3000)
 
   $("button").on("click", function () {

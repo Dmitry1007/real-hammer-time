@@ -2,6 +2,7 @@ const assert   = require('assert');
 const app      = require('../server');
 const request  = require('request');
 const fixtures = require('./fixtures');
+const Poll     = require("../lib/poll")
 
 describe('Server', () => {
   before((done) => {
@@ -76,25 +77,37 @@ describe('Server', () => {
 
   describe('GET /poll/:id', () => {
     beforeEach(() => {
-      app.polls.testPoll = fixtures.validPoll;
+      var pollFromRequest = {
+                              title: "Module 4 Sentiment",
+                              question: "How do you feel about mod-4",
+                              responses: [ "it sucks!",
+                                           "it's ok.",
+                                           "it's awesome!"
+                                          ]
+                            }
+
+      this.poll = new Poll(pollFromRequest)
+
+      app.polls.testPoll = this.poll
     });
 
     it('should not return 404', (done) => {
       this.request.get('/poll/testPoll', (error, response) => {
-        if (error) { done(error); }
-        assert.notEqual(response.statusCode, 404);
-        done();
+        if (error) { done(error)}
+        assert.notEqual(response.statusCode, 404)
+        done()
       });
     });
 
-    // it('should return a page that has the title of the poll', (done) => {
-    //   this.request.get('/poll/testPoll', (error, response) => {
-    //     if (error) { done(error); }
-    //     assert(response.body.includes(title),
-    //            `"${response.body}" does not include "${poll.title}".`);
-    //     done();
-    //   });
-    // });
+    it('should return a page that has the title of the poll', (done) => {
+      this.request.get('/poll/testPoll', (error, response) => {
+        if (error) { done(error); }
+
+        assert(response.body.includes(this.poll.title),
+               `"${response.body}" does not include "${this.poll.title}".`);
+        done();
+      });
+    });
   });
 
 });

@@ -20,7 +20,6 @@ app.polls = {}
 app.locals.title = "Make Your Dream Poll";
 
 app.get("/", function (req, res){
-  // res.sendFile(path.join(__dirname, "/public/index.html"))
   res.render('index');
 })
 
@@ -31,13 +30,9 @@ app.post("/poll/new", function (req, res) {
 })
 
 app.get("/poll/:id", function (req, res) {
+  // eval(pry.it)
   var poll = app.polls[req.params.id]
-  console.log(poll)
-  if (poll) {
-    res.render("poll", {pollData: poll})
-  } else {
-    res.sendStatus(404)
-  }
+  res.render("poll", {pollData: poll})
 })
 
 app.get("/vote/:voterId", function (req, res) {
@@ -45,7 +40,6 @@ app.get("/vote/:voterId", function (req, res) {
   var poll = _.find(pollValues, function(value) {
     return value.voterId === req.params.voterId
   })
-  // eval(pry.it)
   res.render("vote", {pollData: poll})
 })
 
