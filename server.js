@@ -53,8 +53,6 @@ if (!module.parent) {
 io.on("connection", function (socket) {
   console.log("A user has connected.", io.engine.clientsCount)
 
-  // io.sockets.emit("usersConnected", io.engine.clientsCount)
-
   socket.emit("clickMessage", "You Clicked.")
 
   socket.on("voted", function (data) {
