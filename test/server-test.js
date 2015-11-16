@@ -65,11 +65,8 @@ describe('Server', () => {
 
       this.request.post('/poll/new', { form: payload }, (error, response) => {
         if (error) { done(error); }
-
         var pollCount = Object.keys(app.polls).length;
-
         assert.equal(pollCount, 1, `Expected 1 polls, found ${pollCount}`);
-
         done();
       });
     });
@@ -108,6 +105,32 @@ describe('Server', () => {
         done();
       });
     });
+  });
+
+  describe('GET /vote/:voterId', () => {
+    beforeEach(() => {
+      var pollFromRequest = {
+                              title: "Module 4 Sentiment",
+                              question: "How do you feel about mod-4",
+                              responses: [ "it sucks!",
+                                           "it's ok.",
+                                           "it's awesome!"
+                                          ]
+                            }
+
+      this.poll = new Poll(pollFromRequest)
+      app.polls.testPoll = this.poll
+      this.voterId = this.poll.voterId
+    });
+
+    it('should not return 404', (done) => {
+      this.request.get('/vote/' + this.voterId, (error, response) => {
+        if (error) { done(error)}
+        assert.notEqual(response.statusCode, 404)
+        done()
+      });
+    });
+
   });
 
 });

@@ -40,6 +40,9 @@ app.get("/vote/:voterId", function (req, res) {
   var poll = _.find(pollValues, function(value) {
     return value.voterId === req.params.voterId
   })
+  // console.log("#############")
+  // console.log(poll)
+  // console.log("#############")
   res.render("vote", {pollData: poll})
 })
 
