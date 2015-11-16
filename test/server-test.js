@@ -131,6 +131,15 @@ describe('Server', () => {
       });
     });
 
+    it('should return a page that has the question of the poll', (done) => {
+      this.request.get('/vote/' + this.voterId, (error, response) => {
+        if (error) { done(error); }
+
+        assert(response.body.includes(this.poll.question),
+               `"${response.body}" does not include "${this.poll.question}".`);
+        done();
+      });
+    });
   });
 
 });
