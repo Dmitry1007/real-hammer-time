@@ -58,13 +58,15 @@ if (!module.parent) {
 io.on("connection", function (socket) {
   console.log("A user has connected.", io.engine.clientsCount)
 
-  socket.emit("clickMessage", "You Clicked.")
+  socket.on("closePoll", function (data) {
+    var poll = app.polls[data.pollId]
+    poll.open = false
+    io.sockets.emit("pollClosed", {pollData: poll})
+  })
 
   socket.on("voted", function (data) {
     var poll = app.polls[data.pollId]
-    console.log(poll)
     poll.responsesAndVotes[data.response]++
-    console.log(poll)
     io.sockets.emit("clickVote", {pollData: poll})
   })
 

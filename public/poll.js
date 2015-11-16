@@ -3,3 +3,10 @@ socket.on("clickVote", function (poll) {
     element.innerText = poll.pollData.responsesAndVotes[element.id]
   })
 });
+
+$("#close-poll-btn").on("click", function () {
+  var pollId = $('.poll-data').text()
+  socket.emit("closePoll", {pollId: pollId})
+
+  $("#close-poll-btn").text("Open Poll")
+})

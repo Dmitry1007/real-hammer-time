@@ -8,3 +8,11 @@ for (var i = 0; i < buttons.length; i++) {
     socket.emit("voted", {response: response, pollId: pollId})
   });
 }
+
+socket.on("closePoll", function (poll) {
+  $("#poll-closed").fadeIn(3000)
+
+  $("button").on("click", function () {
+    $(this).prop("disabled",true)
+  });
+})
