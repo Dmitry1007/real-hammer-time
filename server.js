@@ -32,7 +32,12 @@ app.post("/poll/new", function (req, res) {
 
 app.get("/poll/:id", function (req, res) {
   var poll = app.polls[req.params.id]
-  res.render("poll", {pollData: poll})
+  console.log(poll)
+  if (poll) {
+    res.render("poll", {pollData: poll})
+  } else {
+    res.sendStatus(404)
+  }
 })
 
 app.get("/vote/:voterId", function (req, res) {
@@ -60,7 +65,7 @@ io.on("connection", function (socket) {
     console.log(poll)
     poll.responsesAndVotes[data.response]++
     console.log(poll)
-    io.sockets.emit("clickVote", poll)
+    io.sockets.emit("clickVote", {pollData: poll})
   })
 
   socket.on("disconnect", function () {
@@ -69,4 +74,4 @@ io.on("connection", function (socket) {
 });
 
 module.exports = app
-module.exports = server
+// module.exports = server

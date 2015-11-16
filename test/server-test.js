@@ -79,13 +79,13 @@ describe('Server', () => {
       app.polls.testPoll = fixtures.validPoll;
     });
 
-    // it('should not return 404', (done) => {
-    //   this.request.get('/poll/testPoll', (error, response) => {
-    //     if (error) { done(error); }
-    //     assert.notEqual(response.statusCode, 404);
-    //     done();
-    //   });
-    // });
+    it('should not return 404', (done) => {
+      this.request.get('/poll/testPoll', (error, response) => {
+        if (error) { done(error); }
+        assert.notEqual(response.statusCode, 404);
+        done();
+      });
+    });
 
     // it('should return a page that has the title of the poll', (done) => {
     //   this.request.get('/poll/testPoll', (error, response) => {
