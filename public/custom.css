@@ -8,6 +8,22 @@ body {
   margin-top: 10%;
 }
 
+.poll-form {
+  width: 60%;
+}
+
+button {
+  margin-bottom: 2%;
+}
+
 #poll-title {
   text-decoration: underline;
+}
+
+#vote-closed {
+  color: #4CAF50;
+}
+
+#poll-closed {
+  color: red;
 }

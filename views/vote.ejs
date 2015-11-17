@@ -18,7 +18,8 @@
             <div class="card-content white-text">
               <span class="card-title"><%= pollData.title %></span>
               <p><%= pollData.question %></p>
-              <p id="poll-closed" hidden>Poll Has Been Closed!<p>
+              <h5 id="poll-closed" hidden>Poll Has Been Closed!<h5>
+              <h5 id="vote-closed" hidden>Thanks For Your Vote!<h5>
             </div>
             <div class="card-action">
               <%  pollData.responses.forEach(function (response) { %>

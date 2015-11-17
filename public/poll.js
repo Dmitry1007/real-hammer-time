@@ -8,5 +8,5 @@ $("#close-poll-btn").on("click", function () {
   var pollId = $('.poll-data').text()
   socket.emit("closePoll", {pollId: pollId})
 
-  $("#close-poll-btn").text("Open Poll")
+  $("#close-poll-btn").text("Poll Closed").prop("disabled", true)
 })

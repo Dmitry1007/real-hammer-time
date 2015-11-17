@@ -9,6 +9,14 @@ for (var i = 0; i < buttons.length; i++) {
   });
 }
 
+$("button").on("click", function () {
+  $("#vote-closed").fadeIn(3000)
+
+  $("button").each(function () {
+    $(this).prop("disabled",true)
+  })
+})
+
 socket.on("pollClosed", function (poll) {
   $("#poll-closed").fadeIn(3000)
 

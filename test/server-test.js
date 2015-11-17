@@ -39,7 +39,7 @@ describe('Server', () => {
       this.request.get('/', (error, response) => {
         if (error) { done(error); }
         assert(response.body.includes(title),
-               `"${response.body}" does not include "${title}".`);
+          `"${response.body}" does not include "${title}".`);
         done();
       });
     });
@@ -84,7 +84,6 @@ describe('Server', () => {
                             }
 
       this.poll = new Poll(pollFromRequest)
-
       app.polls.testPoll = this.poll
     });
 
@@ -101,7 +100,7 @@ describe('Server', () => {
         if (error) { done(error); }
 
         assert(response.body.includes(this.poll.title),
-               `"${response.body}" does not include "${this.poll.title}".`);
+          `"${response.body}" does not include "${this.poll.title}".`);
         done();
       });
     });
@@ -136,7 +135,7 @@ describe('Server', () => {
         if (error) { done(error); }
 
         assert(response.body.includes(this.poll.question),
-               `"${response.body}" does not include "${this.poll.question}".`);
+          `"${response.body}" does not include "${this.poll.question}".`);
         done();
       });
     });

@@ -40,9 +40,6 @@ app.get("/vote/:voterId", function (req, res) {
   var poll = _.find(pollValues, function(value) {
     return value.voterId === req.params.voterId
   })
-  // console.log("#############")
-  // console.log(poll)
-  // console.log("#############")
   res.render("vote", {pollData: poll})
 })
 
@@ -54,6 +51,7 @@ if (!module.parent) {
 
 io.on("connection", function (socket) {
   console.log("A user has connected.", io.engine.clientsCount)
+  console.log(socket.id)
 
   socket.on("closePoll", function (data) {
     var poll = app.polls[data.pollId]
