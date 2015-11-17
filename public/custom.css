@@ -5,10 +5,18 @@ i {
 body {
   text-align: center;
   font-family: monospace;
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .poll-form {
+  width: 60%;
+}
+
+.admin-poll {
+  width: 60%;
+}
+
+.vote-poll {
   width: 60%;
 }
 
