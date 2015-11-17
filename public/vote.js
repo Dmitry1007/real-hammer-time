@@ -20,7 +20,7 @@ $("button").on("click", function () {
 socket.on("pollClosed", function (poll) {
   $("#poll-closed").fadeIn(3000)
 
-  $("button").on("click", function () {
+  $("button").each(function () {
     $(this).prop("disabled",true)
-  });
+  })
 })
