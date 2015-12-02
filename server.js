@@ -41,11 +41,9 @@ app.get("/vote/:voterId", function (req, res) {
   res.render("vote", {pollData: poll})
 })
 
-
 var server = http.listen(process.env.PORT || 3000, function(){
   console.log("Your server is up and running on Port 3000. Good job!")
 })
-
 
 io.on("connection", function (socket) {
   console.log("A user has connected.", io.engine.clientsCount)

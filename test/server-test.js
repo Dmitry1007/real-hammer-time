@@ -74,14 +74,7 @@ describe("Server", () => {
 
   describe("GET /poll/:id", () => {
     beforeEach(() => {
-      var pollFromRequest = {
-                              title: "Module 4 Sentiment",
-                              question: "How do you feel about mod-4",
-                              responses: [ "it sucks!",
-                                           "it's ok.",
-                                           "it's awesome!"
-                                          ]
-                            }
+      var pollFromRequest = fixtures.validPoll
 
       this.poll = new Poll(pollFromRequest)
       app.polls.testPoll = this.poll
@@ -108,14 +101,7 @@ describe("Server", () => {
 
   describe("GET /vote/:voterId", () => {
     beforeEach(() => {
-      var pollFromRequest = {
-                              title: "Module 4 Sentiment",
-                              question: "How do you feel about mod-4",
-                              responses: [ "it sucks!",
-                                           "it's ok.",
-                                           "it's awesome!"
-                                          ]
-                            }
+      var pollFromRequest = fixtures.validPoll
 
       this.poll = new Poll(pollFromRequest)
       app.polls.testPoll = this.poll
