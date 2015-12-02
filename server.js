@@ -17,10 +17,8 @@ app.use(express.static("public"))
 
 app.polls = {}
 
-app.locals.title = "Make Your Dream Poll";
-
 app.get("/", function (req, res){
-  res.render('index');
+  res.render('index')
 })
 
 app.post("/poll/new", function (req, res) {
@@ -67,7 +65,7 @@ io.on("connection", function (socket) {
 
   socket.on("disconnect", function () {
     console.log("A user has disconnected.", io.engine.clientsCount)
-  });
-});
+  })
+})
 
 module.exports = app
