@@ -7,7 +7,7 @@ const http       = require("http").Server(app)
 const io         = require("socket.io")(http)
 const path       = require("path")
 const bodyParser = require("body-parser")
-const helpers    = require('express-helpers')(app)
+const helpers    = require("express-helpers")(app)
 
 app.set("view engine", "ejs")
 
@@ -18,7 +18,7 @@ app.use(express.static("public"))
 app.polls = {}
 
 app.get("/", function (req, res){
-  res.render('index')
+  res.render("index")
 })
 
 app.post("/poll/new", function (req, res) {
@@ -41,11 +41,11 @@ app.get("/vote/:voterId", function (req, res) {
   res.render("vote", {pollData: poll})
 })
 
-if (!module.parent) {
-  var server = http.listen(process.env.PORT || 3000, function(){
-    console.log("Your server is up and running on Port 3000. Good job!")
-  })
-}
+
+var server = http.listen(process.env.PORT || 3000, function(){
+  console.log("Your server is up and running on Port 3000. Good job!")
+})
+
 
 io.on("connection", function (socket) {
   console.log("A user has connected.", io.engine.clientsCount)
