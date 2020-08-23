@@ -15,7 +15,7 @@
     "ejs": "^2.3.4",
     "express": "^4.12.3",
     "express-helpers": "^1.3.2",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.19",
     "pryjs": "^0.1.3",
     "socket.io": "^1.3.5"
   },
